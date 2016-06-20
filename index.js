@@ -1,4 +1,3 @@
-// import _ from 'lodash'
 
 export default class {
 
@@ -6,25 +5,32 @@ export default class {
     return value1 + value2
   }
 
-  static groupBy(records, ...names){
+  static groupBy(records, ...separators){
 
     let groups = {}
+    let separator = separators[0]
+
     records.forEach((record) => {
-      let name = names[0]
-      let key = record[name]
+      let key
+      if(typeof separator === 'function'){
+        key = separator(record)
+      }else{
+        key = record[separator]
+      }
+
       if(!groups[key]){
         groups[key] = []
       }
       groups[key].push(record)
     })
 
-    if(names.length === 1){
+    if(separators.length === 1){
       return groups
     }
 
-    names.shift()
+    separators.shift()
     Object.keys(groups).forEach((key) => {
-      groups[key] = this.groupBy(groups[key], ...names)
+      groups[key] = this.groupBy(groups[key], ...separators)
     })
     return groups
   }

@@ -61,7 +61,7 @@ describe('Summary', function(){
         ],
       }
 
-      assert.deepEqual(Summary.groupBy(records, 'sex'), expect);
+      assert.deepEqual(Summary.groupBy(records, 'sex'), expect)
     })
 
     it('two arguments', function(){
@@ -80,12 +80,31 @@ describe('Summary', function(){
             records[1],
             records[3],
           ],
-          // 'female': [
-          // ],
         },
       }
 
-      assert.deepEqual(Summary.groupBy(records, 'group', 'sex'), expect);
+      assert.deepEqual(Summary.groupBy(records, 'group', 'sex'), expect)
+    })
+
+    it('function argument', function(){
+      let expect = {
+        '10': [
+          records[4],
+        ],
+        '20': [
+          records[0],
+          records[2],
+        ],
+        '30': [
+          records[1],
+          records[3],
+        ],
+      }
+      var func = function(record){
+        return Math.floor(record.age / 10) * 10
+      }
+
+      assert.deepEqual(Summary.groupBy(records, func), expect)
     })
 
   })
