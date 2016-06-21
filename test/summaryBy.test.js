@@ -67,6 +67,48 @@ describe('summaryBy', function(){
       assert.deepEqual(Summary.summaryBy(records, 'sex'), expect)
     })
 
+    it('array separator', function(){
+      let expect = {
+        'A': {
+          $count: 3,
+          $data: [
+            records[0],
+            records[2],
+            records[4],
+          ],
+          'male': {
+            $count: 1,
+            $data: [
+              records[0],
+            ],
+          },
+          'female': {
+            $count: 2,
+            $data: [
+              records[2],
+              records[4],
+            ],
+          },
+        },
+        'B': {
+          $count: 2,
+          $data: [
+            records[1],
+            records[3],
+          ],
+          'male': {
+            $count: 2,
+            $data: [
+              records[1],
+              records[3],
+            ],
+          },
+        },
+      }
+      
+      assert.deepEqual(Summary.summaryBy(records, ['group', 'sex']), expect)
+    })
+
   })
 
 })

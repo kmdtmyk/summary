@@ -59,10 +59,10 @@ export default class{
     if(separators.length === 1){
       return groups
     }
-
+    
     separators.shift()
     Object.keys(groups).forEach((key) => {
-      groups[key] = this.summaryBy(groups[key], separators)
+      Object.assign(groups[key], this.summaryBy(groups[key].$data, separators))
     })
     return groups
   }
