@@ -14,11 +14,7 @@ export default class{
 
     records.forEach((record) => {
       let key = this.recordKey(record, separator)
-
-      if(!groups[key]){
-        groups[key] = []
-      }
-      groups[key].push(record)
+      groups[key] = this.arrayPush(groups[key], record)
     })
 
     if(separators.length === 1){
@@ -35,18 +31,7 @@ export default class{
   static summaryBy(records, separators){
 
     separators = this.arrayWrap(separators)
-
-    let groups = {}
-    let separator = separators[0]
-
-    records.forEach((record) => {
-      let key = this.recordKey(record, separator)
-
-      if(!groups[key]){
-        groups[key] = []
-      }
-      groups[key].push(record)
-    })
+    let groups = this.groupBy(records, separators[0])
 
     Object.keys(groups).forEach((key) => {
       let data = groups[key]
@@ -59,7 +44,7 @@ export default class{
     if(separators.length === 1){
       return groups
     }
-    
+
     separators.shift()
     Object.keys(groups).forEach((key) => {
       Object.assign(groups[key], this.summaryBy(groups[key].$data, separators))
@@ -81,6 +66,14 @@ export default class{
       return [value]
     }
     return value
+  }
+
+  static arrayPush(array, value){
+    if(!this.isArray(array)){
+      array = []
+    }
+    array.push(value)
+    return array
   }
 
   static isFunction(value){
