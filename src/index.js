@@ -7,20 +7,13 @@ export default class{
 
   static groupBy(records, separators){
 
-    if(!Array.isArray(separators)){
-      separators = [separators]
-    }
+    separators = this.arrayWrap(separators)
 
     let groups = {}
     let separator = separators[0]
 
     records.forEach((record) => {
-      let key
-      if(typeof separator === 'function'){
-        key = separator(record)
-      }else{
-        key = record[separator]
-      }
+      let key = this.recordKey(record, separator)
 
       if(!groups[key]){
         groups[key] = []
@@ -37,6 +30,34 @@ export default class{
       groups[key] = this.groupBy(groups[key], separators)
     })
     return groups
+  }
+
+  static recordKey(record, separator){
+    if(this.isFunction(separator)){
+      return separator(record)
+    }else if(this.isObject(record)){
+      return record[separator]
+    }
+    return record
+  }
+
+  static arrayWrap(value){
+    if(!this.isArray(value)){
+      return [value]
+    }
+    return value
+  }
+
+  static isFunction(value){
+    return typeof value === 'function'
+  }
+
+  static isObject(value){
+    return typeof value === 'object'
+  }
+
+  static isArray(value){
+    return Array.isArray(value)
   }
 
 }
