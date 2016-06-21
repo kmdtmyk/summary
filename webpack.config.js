@@ -4,11 +4,13 @@ var webpack = require('webpack');
 module.exports = {
   context: __dirname,
   entry: {
-    summary: './src/index.js',
+    summary: './src/index',
   },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].min.js',
+    library: 'Summary',
+    libraryTarget: 'umd',
   },
   module: {
     loaders: [
