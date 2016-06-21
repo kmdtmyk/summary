@@ -5,8 +5,12 @@ export default class {
     return value1 + value2
   }
 
-  static groupBy(records, ...separators){
+  static groupBy(records, separators){
 
+    if(!Array.isArray(separators)){
+      separators = [separators]
+    }
+    
     let groups = {}
     let separator = separators[0]
 
@@ -30,7 +34,7 @@ export default class {
 
     separators.shift()
     Object.keys(groups).forEach((key) => {
-      groups[key] = this.groupBy(groups[key], ...separators)
+      groups[key] = this.groupBy(groups[key], separators)
     })
     return groups
   }

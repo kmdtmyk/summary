@@ -1,5 +1,5 @@
 {
-  "name": "group",
+  "name": "summary",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,21 +8,13 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "assert": "^1.4.1",
     "babel": "^6.5.2",
     "babel-cli": "^6.9.0",
     "babel-core": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
-    "karma": "^0.13.22",
-    "karma-mocha": "^1.0.1",
-    "karma-phantomjs-launcher": "^1.0.0",
-    "mocha": "^2.5.3",
-    "phantomjs": "^2.1.7",
-    "webpack": "^1.13.1"
-  },
-  "dependencies": {
-    "lodash": "^4.13.1"
+    "mocha": "^2.5.3"
   }
 }

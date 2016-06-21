@@ -48,7 +48,7 @@ describe('Summary', function(){
 
   describe('groupBy', function(){
 
-    it('one argument', function(){
+    it('one separator', function(){
       let expect = {
         'male': [
           records[0],
@@ -64,7 +64,7 @@ describe('Summary', function(){
       assert.deepEqual(Summary.groupBy(records, 'sex'), expect)
     })
 
-    it('two arguments', function(){
+    it('array separators', function(){
       let expect = {
         'A': {
           'male': [
@@ -83,10 +83,10 @@ describe('Summary', function(){
         },
       }
 
-      assert.deepEqual(Summary.groupBy(records, 'group', 'sex'), expect)
+      assert.deepEqual(Summary.groupBy(records, ['group', 'sex']), expect)
     })
 
-    it('function argument', function(){
+    it('function separator', function(){
       let expect = {
         '10': [
           records[4],
