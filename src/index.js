@@ -32,6 +32,41 @@ export default class{
     return groups
   }
 
+  static summaryBy(records, separators){
+
+    separators = this.arrayWrap(separators)
+
+    let groups = {}
+    let separator = separators[0]
+
+    records.forEach((record) => {
+      let key = this.recordKey(record, separator)
+
+      if(!groups[key]){
+        groups[key] = []
+      }
+      groups[key].push(record)
+    })
+
+    Object.keys(groups).forEach((key) => {
+      let data = groups[key]
+      groups[key] = {
+        $count: data.length,
+        $data: data,
+      }
+    })
+
+    if(separators.length === 1){
+      return groups
+    }
+
+    separators.shift()
+    Object.keys(groups).forEach((key) => {
+      groups[key] = this.summaryBy(groups[key], separators)
+    })
+    return groups
+  }
+
   static recordKey(record, separator){
     if(this.isFunction(separator)){
       return separator(record)
