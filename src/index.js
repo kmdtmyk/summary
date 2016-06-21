@@ -10,7 +10,7 @@ export default class {
     if(!Array.isArray(separators)){
       separators = [separators]
     }
-    
+
     let groups = {}
     let separator = separators[0]
 

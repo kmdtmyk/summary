@@ -1,6 +1,6 @@
 import assert from 'assert'
 
-import Summary from '../index.js'
+import Summary from '../src/index.js'
 
 describe('Summary', function(){
 
